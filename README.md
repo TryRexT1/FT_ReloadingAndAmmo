@@ -13,8 +13,10 @@ In this we will be adding Data Assets to handle and update different types of am
 - Implement the passing the data asset information to the projectile to update the projectile values.
 ## Hints  
 
-### Reloading 
-I have built you a simple delay system. 
+### Reloading - TP_WeaponComponent.cpp
+This script has the main functioanality for the reloading system, you will need to complete the Reload function.
+
+I have built you a simple delay system and the Fire Method is what you want to edit. Remember to contianrise the functionality, if it's to do with the weapon have it here or in a subclass if it's starting to get too complicated.
 
 ## Changes from base project
 
@@ -44,7 +46,23 @@ Notice, that i have added to add the header file for the AmmoType at the top of 
 I have also update the blueprint BP_PickUp_Rifle (Content->Blueprints->BP_PickUp_Rifle) to set the Ammo Type Data Asset, to a Default AmmoType. 
 ![The Rifle Blueprint with the deafult ammo type.](Hints/RifleDefaultAmmo.png)
 
+### TP_WeaponComponent.cpp
+I have adjsut the fire method to pass temporaliy store the spawned actored and then set the damage value from the weapon component to the projectile.
+```
+// Spawn the projectile at the muzzle
+AFT_ReloadingAndAmmoProjectile* Projectile = World->SpawnActor<AFT_ReloadingAndAmmoProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+if (Projectile)
+{
+	Projectile->Damage = AmmoType->Damage;
+}
+```
 
+### FT_ReloadingAndAmmoProjectile.h
+We have also created a matching damage value in the projectile to store the damage value passed from the weapon.
+```
+public:
+	int Damage;
+```
 ### Input system and binding
 
 ### Data Assets for Ammo Types

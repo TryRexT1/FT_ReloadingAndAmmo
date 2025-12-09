@@ -15,7 +15,6 @@ ATarget::ATarget()
 
 	// Set up overlap events
 	TargetMesh->SetGenerateOverlapEvents(true);
-	TargetMesh->OnComponentBeginOverlap.AddDynamic(this, &ATarget::OnOverlapBegin);
 }
 
 // Called when the game starts or when spawned
@@ -41,12 +40,21 @@ void ATarget::Tick(float DeltaTime)
 	}
 }
 
-void ATarget::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ATarget::Hit(int Damage)
 {
-	UE_LOG(LogTemp, Warning, TEXT("OverlapBegin triggered"));
+	UE_LOG(LogTemp, Warning, TEXT("Target hit with damage: %d"), Damage);
 	bIsHit = true;
-	
 	// hide the mesh for a bit
 	TargetMesh->SetVisibility(false);
 	TargetMesh->SetGenerateOverlapEvents(false);
+
+	// built in time delay function to reset the target after 3 seconds
+	GetWorldTimerManager().SetTimer(ResetTimerHandle, this, &ATarget::ResetTarget, 3.0f, false);
+}
+
+void ATarget::ResetTarget()
+{
+	bIsHit = false;
+	TargetMesh->SetVisibility(true);
+	TargetMesh->SetGenerateOverlapEvents(true);
 }

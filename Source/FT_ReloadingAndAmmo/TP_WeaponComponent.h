@@ -60,6 +60,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	void Fire();
 
+	/** Get the ammo count*/ 
+	UFUNCTION(BlueprintCallable, Category = "Ammo")
+	int GetAmmoInClip();
+
 protected:
 	/** Ends gameplay for this component. */
 	UFUNCTION()

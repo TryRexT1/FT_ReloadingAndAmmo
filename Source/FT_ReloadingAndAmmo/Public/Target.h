@@ -26,12 +26,13 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	FTimerHandle ResetTimerHandle;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
+	void Hit(int Damage);
+	UFUNCTION()
+	void ResetTarget();
 };

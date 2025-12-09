@@ -21,6 +21,8 @@ class AFT_ReloadingAndAmmoProjectile : public AActor
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
+public:
+	int Damage;
 
 public:
 	AFT_ReloadingAndAmmoProjectile();

@@ -44,7 +44,11 @@ void UTP_WeaponComponent::Fire()
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 	
 			// Spawn the projectile at the muzzle
-			World->SpawnActor<AFT_ReloadingAndAmmoProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			AFT_ReloadingAndAmmoProjectile* Projectile = World->SpawnActor<AFT_ReloadingAndAmmoProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			if (Projectile)
+			{
+				Projectile->Damage = AmmoType->Damage;
+			}
 		}
 	}
 	
@@ -64,6 +68,11 @@ void UTP_WeaponComponent::Fire()
 			AnimInstance->Montage_Play(FireAnimation, 1.f);
 		}
 	}
+}
+
+int UTP_WeaponComponent::GetAmmoInClip()
+{
+	return AmmoInClip;
 }
 
 bool UTP_WeaponComponent::AttachWeapon(AFT_ReloadingAndAmmoCharacter* TargetCharacter)
@@ -99,6 +108,8 @@ bool UTP_WeaponComponent::AttachWeapon(AFT_ReloadingAndAmmoCharacter* TargetChar
 		}
 	}
 
+	
+	UE_LOG(LogTemp, Warning, TEXT("This is where to bind and setup the UI"));
 	return true;
 }
 
