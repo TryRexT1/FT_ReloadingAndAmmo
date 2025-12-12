@@ -3,7 +3,7 @@
 #include "FT_ReloadingAndAmmoProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
-#include <Target.h>
+#include <TargetPanel.h>
 
 AFT_ReloadingAndAmmoProjectile::AFT_ReloadingAndAmmoProjectile() 
 {
@@ -37,7 +37,7 @@ void AFT_ReloadingAndAmmoProjectile::OnHit(UPrimitiveComponent* HitComp, AActor*
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
 	{
-		ATarget* target = Cast<ATarget>(OtherActor);
+		ATargetPanel* target = Cast<ATargetPanel>(OtherActor);
 		if (target)
 		{ 
 			target->Hit(Damage);

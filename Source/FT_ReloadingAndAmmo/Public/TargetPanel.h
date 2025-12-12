@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Target.generated.h"
+#include "TargetPanel.generated.h"
 
 UCLASS()
-class FT_RELOADINGANDAMMO_API ATarget : public AActor
+class FT_RELOADINGANDAMMO_API ATargetPanel : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATarget();
+	ATargetPanel();
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Components, meta = (AllowPrivateAccess = "true"))
 	bool bIsHit;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components, meta = (AllowPrivateAccess = "true"))

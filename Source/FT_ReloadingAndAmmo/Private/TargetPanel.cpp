@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Target.h"
+#include "TargetPanel.h"
 #include "Components/StaticMeshComponent.h" 
 
 // Sets default values
-ATarget::ATarget()
+ATargetPanel::ATargetPanel()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -18,14 +18,14 @@ ATarget::ATarget()
 }
 
 // Called when the game starts or when spawned
-void ATarget::BeginPlay()
+void ATargetPanel::BeginPlay()
 {
 	Super::BeginPlay();
 	bIsHit = false;
 }
 
 // Called every frame
-void ATarget::Tick(float DeltaTime)
+void ATargetPanel::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (bIsMoving && bIsHit == false)
@@ -40,7 +40,7 @@ void ATarget::Tick(float DeltaTime)
 	}
 }
 
-void ATarget::Hit(int Damage)
+void ATargetPanel::Hit(int Damage)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Target hit with damage: %d"), Damage);
 	bIsHit = true;
@@ -49,10 +49,10 @@ void ATarget::Hit(int Damage)
 	TargetMesh->SetGenerateOverlapEvents(false);
 
 	// built in time delay function to reset the target after 3 seconds
-	GetWorldTimerManager().SetTimer(ResetTimerHandle, this, &ATarget::ResetTarget, 3.0f, false);
+	GetWorldTimerManager().SetTimer(ResetTimerHandle, this, &ATargetPanel::ResetTarget, 3.0f, false);
 }
 
-void ATarget::ResetTarget()
+void ATargetPanel::ResetTarget()
 {
 	bIsHit = false;
 	TargetMesh->SetVisibility(true);
