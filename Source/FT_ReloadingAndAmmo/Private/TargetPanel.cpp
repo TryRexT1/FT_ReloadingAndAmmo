@@ -60,6 +60,7 @@ void ATargetPanel::Hit(int Damage)
 	// hide the mesh for a bit
 	TargetMesh->SetVisibility(false);
 	TargetMesh->SetGenerateOverlapEvents(false);
+	TargetMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	// built in time delay function to reset the target after 3 seconds
 	GetWorldTimerManager().SetTimer(ResetTimerHandle, this, &ATargetPanel::ResetTarget, 3.0f, false);
@@ -70,4 +71,5 @@ void ATargetPanel::ResetTarget()
 	bIsHit = false;
 	TargetMesh->SetVisibility(true);
 	TargetMesh->SetGenerateOverlapEvents(true);
+	TargetMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 }

@@ -45,7 +45,7 @@ void UTP_WeaponComponent::Fire()
 	
 			// Spawn the projectile at the muzzle
 			AFT_ReloadingAndAmmoProjectile* Projectile = World->SpawnActor<AFT_ReloadingAndAmmoProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
-			if (Projectile)
+			if (Projectile && AmmoType)
 			{
 				Projectile->Damage = AmmoType->Damage;
 			}
